@@ -29,3 +29,6 @@ python manage.py db upgrade
 
 Then Run the Project
 python app.py
+
+
+Check Test-cases File - https://github.com/venkatasivaramireddy/Flask_basic_api_application/blob/master/api_test_case_document.txt
