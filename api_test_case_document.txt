@@ -1,0 +1,222 @@
+SIGUP- API
+Request: (/signup)
+Request method - POST
+Headers - None
+
+Test Case-1:
+
+Body - Raw data
+{
+    "username":"test",
+    "email":"test@a.c",
+    "mobile":"9483112724",
+    "password":"T-1234"
+}
+Response_Json:
+{
+    "message": "Successfully Register, Login Using Email & Password",
+    "status_code": 201
+}
+Test Case-2:
+
+Body - Raw data
+{
+    "username":"vvsrr"
+}
+Response_Json:
+{
+    "message": "Missing ['email', 'password', 'mobile'] Key",
+    "status_code": 400
+}
+
+Test Case-3:
+
+Body - Raw data
+{
+    "username":"test",
+    "email":"test@a.c",
+    "mobile":"9483112724",
+    "password":"T-1234",
+    "extra_field":""
+}
+Response_Json:
+{
+    "message": "['extra_field'] Is In_Valid Key",
+    "status_code": 400
+}
+Test Case-4:
+
+Body - Raw data
+{
+    "username":"test",
+    "email":"test@a.c",
+    "mobile":"9483112724",
+    "password":"T-1234"
+}
+Response_Json:
+{
+    "message": "Email Already Exist",
+    "status_code": 400
+}
+Test Case-5:
+
+Body - Raw data
+{
+    "username":"fortesting",
+    "email":"test@ab.c",
+    "mobile":"9483112724",
+    "password":"T-1234"
+}
+Response_Json:
+{
+    "message": "Username max length should be 8",
+    "status_code": 400
+}
+
+Test Case-6:
+Body - Raw data
+{
+    "username":"test",
+    "email":"test.c",
+    "mobile":"9483117724",
+    "password":"T-1234"
+}
+Response_Json:
+{
+    "message": "Email Should have @ -> Ex: a@b.c",
+    "status_code": 400
+}
+
+Test Case-7:
+
+Body - Raw data
+{
+    "username":"test",
+    "email":"test@h.c",
+    "mobile":"94724",
+    "password":"T-1234"
+}
+Response_Json:
+{
+    "message": "Phone Number must be a valid Indian Cell phone number -> Ex. 9876543210",
+    "status_code": 400
+}
+Test Case-8:
+
+Body - Raw data
+{
+    "username":"test",
+    "email":"test@h.c",
+    "mobile":"9483112724",
+    "password":"1234"
+}
+Response_Json:
+{
+    "message": "Password must contain at least one character, one number and any one of these (underscore, hyphen, hash) and max length should be 6",
+    "status_code": 400
+}
+
+
+Login- API
+Request: (/login)
+Request method - POST
+Headers - None
+
+Test Case-1:
+Body - Raw data
+{
+    "email":"vv@a.c",
+    "password":"V-1234"
+}
+Response_Json:
+{
+    "message": "Successfully Loged In",
+    "result": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTA0MTQ0OTYsIm5iZiI6MTYxMDQxNDQ5NiwianRpIjoiNTU5MGJiYjItZTkyMC00MGU4LWFmODctMzkyNTBkMjBkNDRiIiwiZXhwIjoxNjEwNDE3MTk2LCJpZGVudGl0eSI6InZ2QGEuYyIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.Xya54R4Jr_sTyGxkLg1AzOJWWDCnMkGhw-6dbPXlKmo",
+        "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTA0MTQ0OTYsIm5iZiI6MTYxMDQxNDQ5NiwianRpIjoiNjI3NDg2NTUtY2ZlOC00NTYzLWExN2MtZDkxYjE3ZTk4ZmUyIiwiZXhwIjoxNjEwNDE3MTk2LCJpZGVudGl0eSI6InZ2QGEuYyIsInR5cGUiOiJyZWZyZXNoIn0.swEHib0ixKG6tYFibWNwt16OG7yHwv_TYYy0zr2f5R8"
+    },
+    "status_code": 200
+}
+
+Test Case-2:
+Body - Raw data
+{
+    "email":"vv@a.c",
+    "password":"234"
+}
+Response_Json:
+{
+    "message": "Invalid Password",
+    "status_code": 401
+}
+Test Case-3:
+Body - Raw data
+{
+    "email":"vvc",
+    "password":"V-1234"
+}
+Response_Json:
+{
+    "message": "Invalid Email",
+    "status_code": 401
+}
+
+Test Case-4:
+Body - Raw data
+{
+    "usrrname":"vv@a.c",
+    "password":"V-1234"
+}
+Response_Json:
+{
+    "message": "Missing 'email' Key",
+    "status_code": 400
+}
+
+Test Case-5:
+Body - Raw data
+{
+    "email":"vv@a.c",
+    "pasord":"V-1234"
+}
+Response_Json:
+{
+    "message": "Missing 'password' Key",
+    "status_code": 400
+}
+
+PROFILE- API
+Request: (/profile)
+Request method - GET
+Headers - {“Authorization”: “Bearer ” + access_token}
+
+Test Case-1:
+
+Response_Json:
+{
+    "result": {
+        "createdAt": "2021-01-11T17:42:43+00:00",
+        "email": "vv@a.c",
+        "id": 3,
+        "mobile": "9883112724",
+        "password": "pbkdf2:sha256:150000$PEMa7JE7$2b6d09fa96b060c298a43354bacc9804e1b7bddb6c8ec156922adb8a527a946c",
+        "updatedAt": null,
+        "username": "vvsrr"
+    },
+    "status_code": 200
+}
+ 
+LOGOUT- API
+Request: (/logout)
+Request method - DELETE
+Headers - {“Authorization”: “Bearer ” + access_token}
+
+Test Case-1:
+Response_Json:
+{
+    "message": "Successfully logged out",
+    "status_code": 200
+}
+
+
+
