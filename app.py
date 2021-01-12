@@ -7,10 +7,10 @@ from flask_restful import Api
 from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from cachetools import cached, TTLCache
+# from cachetools import cached, TTLCache
 
 app = Flask(__name__)
-cache = TTLCache(maxsize=100, ttl=60)
+# cache = TTLCache(maxsize=100, ttl=60)
 # app.config.from_object(__name__)
 ma = Marshmallow(app)
 CORS(app)
@@ -39,7 +39,7 @@ else:
 # db
 app.config["SQLALCHEMY_ECHO"] = False
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://admin:admin@localhost/user_db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://admin:admin@localhost/test_user_db"
 app.config["SQLALCHEMY_ECHO"] = True
 app.config['SECRET_KEY'] = '3b8d7b303173189153979542'
 db = SQLAlchemy(app)
